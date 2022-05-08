@@ -1,0 +1,32 @@
+h2 a {
+  text-decoration: none;
+  color: #000;
+}
+
+.blog-item p {
+  margin-top: 10px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.blog-item span {
+  font-size: 0.8rem;
+  color: #969696;
+}
+
+.blog-item span a {
+  font-size: 0.8rem;
+  color: #969696;
+  text-decoration: none;
+}
+
+.blog-item span a:visited {
+  color: #969696;
+}
+
+span.tag::before {
+  content: ' · ';
+}

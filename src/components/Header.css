@@ -1,0 +1,18 @@
+.flex-ul {
+  padding: 0 15px;
+  margin: 0 auto;
+  width: 800px;
+  display: flex;
+  list-style-type: none;
+  height: 2.2rem;
+  align-items: center;
+}
+
+.flex-ul li {
+  padding-right: 15px;
+  margin-right: 1rem;
+}
+
+.flex-ul a:visited {
+  color: rgb(0, 0, 238);
+}

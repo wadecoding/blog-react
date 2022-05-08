@@ -1,0 +1,13 @@
+.go-top {
+  border: none;
+  background-color: rgb(71, 135, 231);
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
