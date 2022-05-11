@@ -1,62 +1,92 @@
 import { Table, Tag, Space, Button } from 'antd';
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { useNavigate } from 'react-router-dom';
+import './Index.css'
 
 
 function Index() {
+  const [blogs, setBlogs] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [total, setTotal] = useState(0)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    request(currentPage)
+  }, [])
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:7001/getBlogsCount`)
+      .then(data => data.json())
+      .then(data => {
+        setTotal(data[0].res)
+      })
+  }, [])
+
+  function request(page) {
+    fetch(`http://127.0.0.1:7001/api/v1/blog?page=${page}`)
+      .then(data => data.json())
+      .then(data => setBlogs(data))
+  }
+
+  function handleEdit(id) {
+    navigate(`/admin/editBlog/${id}`)
+
+  }
+
+  function handleDelete(id) {
+    fetch(`http://127.0.0.1:7001/api/v1/blog/${id}`, {
+      method: 'DELETE'
+    })
+      .then(data => {
+        if (data.status === 204) {
+          console.log('check');
+        }
+      })
+  }
+
+  function changePage(page) {
+    request(page)
+  }
+
   const columns = [
     {
       title: '标题',
       dataIndex: 'title',
       key: 'id',
-      render: text => text,
+      render: text => <ReactMarkdown children={text} />,
     },
     {
       title: '标签',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: tags => (
-        <>
-          {tags.map(tag => {
-            return (
-              <Tag key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
+      key: 'tag',
+      dataIndex: 'tag',
+      render: tag => (
+        <Tag key={tag}>
+          {tag.toUpperCase()}
+        </Tag>
+      )
     },
     {
       title: '操作',
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button type='primary'>修改</Button>
-          <Button type='danger'>删除</Button>
+          <Button type='primary' onClick={() => handleEdit(record.id)}>修改</Button>
+          <Button type='danger' onClick={() => handleDelete(record.id)}>删除</Button>
         </Space>
       ),
     },
   ];
 
-  const data = [
-    {
-      id: '1',
-      title: '部车便好土图将人使术目',
-      tags: ['nice', 'developer'],
-    },
-    {
-      id: '2',
-      title: '装精圆小值王般是制干种',
-      tags: ['loser'],
-    },
-    {
-      id: '3',
-      title: '分易结市理提积调战团白',
-      tags: ['cool', 'teacher'],
-    },
-  ];
-
   return (
-    <Table columns={columns} dataSource={data} rowKey={blog => blog.id} />
+    <div className='content'>
+      <Table columns={columns} dataSource={blogs} rowKey={blog => blog.id}
+        pagination={{
+          total: total,
+          onChange: (current) => changePage(current),
+        }} />
+    </div>
   )
 }
 

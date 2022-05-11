@@ -3,6 +3,10 @@ h2 a {
   color: #000;
 }
 
+.blog-title h1 {
+  font-size: 1.3em;
+}
+
 .blog-item p {
   margin-top: 10px;
   display: -webkit-box;

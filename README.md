@@ -7,11 +7,11 @@
 - [x] 文章浏览
 - [x] 标签浏览
 - [x] 分页
-- [ ] react-markdown渲染真实数据
-- [ ] 分页
+- [x] react-markdown渲染真实数据
+- [x] 分页
 
 ## 管理
-- [x] 登录
+- [ ] 登录
 - [x] 利用react-markdown新建博客
 - [x] 编辑博客
 - [x] 添加标签

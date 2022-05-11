@@ -10,8 +10,9 @@ import Login from './admin/Login'
 import NewBlog from './admin/NewBlog'
 import Index from './admin/Index'
 import EditBlog from './admin/EditBlog'
+import request from './asset'
 
-function App () {
+function App() {
   return (
     <>
       <Routes>
@@ -24,7 +25,7 @@ function App () {
           <Route path='index' element={<Index />} />
           <Route path='login' element={<Login />} />
           <Route path='newBlog' element={<NewBlog />} />
-          <Route path='editBlog' element={<EditBlog />} />
+          <Route path='editBlog/:id' element={<EditBlog />} />
         </Route>
       </Routes>
     </>
